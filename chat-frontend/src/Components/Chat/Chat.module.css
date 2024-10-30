@@ -23,9 +23,15 @@
   border-radius: 9px;
 }
 
+.content h1 {
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+}
+
 .content input {
   margin-top: 8px;
-  padding: 2px;
+  padding: 2px 2px 2px 12px;
   height: 40px;
   border-radius: 9px;
   border: 1px solid #333;
@@ -91,4 +97,17 @@
   background: #f1f1f1;
 
   border-radius: 9px;
+}
+
+.otherMessage+li {
+  margin-top: 4px;
+}
+
+.content .disconnectButton {
+  margin-top: 10px;
+  background-color: red;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
 }

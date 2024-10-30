@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 
 import styles from "./Chat.module.css";
 
@@ -13,31 +13,43 @@ interface Message {
 interface Payload {
   name: string;
   text: string;
+  room: string;
 }
 
-const socket = io("http://localhost:3333");
+// const socket = io("http://localhost:3333");
 
-const Chat: React.FC = () => {
+interface ChatProps {
+  room: string;
+  chatDisconnect: () => void;
+}
+
+const Chat: React.FC<ChatProps> = ({ room, chatDisconnect }) => {
   const [title] = useState("Web Chat");
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [messages, setMessage] = useState<Message[]>([]);
+  const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    function receiveMessage(message: Payload) {
+    const newSocket = io("http://localhost:3333");
+    setSocket(newSocket);
+
+    newSocket.emit("joinRoom", room);
+
+    newSocket.on("receiveMessage", (message: Payload) => {
       const newMessage: Message = {
         id: nanoid(),
         name: message.name,
         text: message.text,
       };
-
-      setMessage([...messages, newMessage]);
-    }
-
-    socket.on("receiveMessage", (message: Payload) => {
-      receiveMessage(message);
+      setMessage((prevMessages) => [...prevMessages, newMessage]);
     });
-  }, [messages, name, text]);
+
+    return () => {
+      newSocket.emit("leaveRoom", room);
+      newSocket.disconnect();
+    };
+  }, [room]);
 
   function validateInput() {
     return name.length > 0 && text.length > 0;
@@ -48,11 +60,22 @@ const Chat: React.FC = () => {
       const message: Payload = {
         name,
         text,
+        room,
       };
 
       setText("");
-      socket.emit("sendMessage", message);
+      if(socket) {
+        socket.emit("sendMessage", message);
+      }
     }
+  }
+
+  function disconnect() {
+    if(socket) {
+      socket.emit("leaveRoom", room);
+      socket.disconnect();
+    }
+    chatDisconnect();
   }
 
   return (
@@ -100,6 +123,14 @@ const Chat: React.FC = () => {
         />
         <button type="button" onClick={() => sendMessage()}>
           Enviar
+        </button>
+
+        <button
+          type="button"
+          onClick={disconnect}
+          className={styles.disconnectButton}
+        >
+          Desconectar
         </button>
       </div>
     </div>
