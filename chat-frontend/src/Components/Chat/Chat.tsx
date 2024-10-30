@@ -16,8 +16,6 @@ interface Payload {
   room: string;
 }
 
-// const socket = io("http://localhost:3333");
-
 interface ChatProps {
   room: string;
   chatDisconnect: () => void;
