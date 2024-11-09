@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { nanoid } from "nanoid";
 import io, { Socket } from "socket.io-client";
 
@@ -8,12 +8,12 @@ import styles from "./Chat.module.css";
 // Intefaces
 import { IChatProps, IMessage, IPayload } from "../../Interface/Chat.Interface";
 
-const Chat: React.FC<IChatProps> = ({ room, chatDisconnect }) => {
-  const [title] = useState("Web Chat");
-  const [name, setName] = useState("");
+const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
+  const [title] = useState("Web Chat - 💬");
   const [text, setText] = useState("");
   const [messages, setMessage] = useState<IMessage[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const newSocket = io("http://localhost:3333");
@@ -36,8 +36,18 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect }) => {
     };
   }, [room]);
 
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   function validateInput() {
-    return name.length > 0 && text.length > 0;
+    return text.length > 0;
   }
 
   function sendMessage() {
@@ -63,46 +73,42 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect }) => {
     chatDisconnect();
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.content}>
         <h1>{title}</h1>
-        <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Digite seu nome..." />
+        <div className={styles.title_div}>
+          <h2>
+            Bem-vindo, <span className={styles.user_name}>{name}</span>!
+          </h2>
+
+          <button type="button" onClick={disconnect} className={styles.disconnectButton}>
+            Desconectar
+          </button>
+        </div>
         <div className={styles.card}>
           <ul>
-            {messages.map(message => {
-              if (message.name === name) {
-                return (
-                  <li className={styles.myMessage} key={message.id}>
-                    <span>
-                      {message.name}
-                      {" diz:"}
-                    </span>
-                    <p>{message.text}</p>
-                  </li>
-                );
-              }
-
-              return (
-                <li className={styles.otherMessage} key={message.id}>
-                  <span>
-                    {message.name}
-                    {" diz:"}
-                  </span>
-                  <p>{message.text}</p>
-                </li>
-              );
-            })}
+            {messages.map(message => (
+              <li className={message.name === name ? styles.myMessage : styles.otherMessage} key={message.id}>
+                <span>
+                <span className={styles.user_name}>{message.name} </span>diz:</span>
+                <p>{message.text}</p>
+              </li>
+            ))}
+            <div ref={messagesEndRef} />
           </ul>
         </div>
-        <input type="text" onChange={e => setText(e.target.value)} value={text} placeholder="Digite uma mensagem" />
-        <button type="button" onClick={() => sendMessage()}>
-          Enviar
-        </button>
 
-        <button type="button" onClick={disconnect} className={styles.disconnectButton}>
-          Desconectar
-        </button>
+        <div className={styles.button_div}>
+          <input type="text" onChange={e => setText(e.target.value)} value={text} placeholder="Digite uma mensagem" />
+          <button type="button" onClick={() => sendMessage()} title="Enviar mensagem"></button>
+        </div>
       </div>
     </div>
   );
