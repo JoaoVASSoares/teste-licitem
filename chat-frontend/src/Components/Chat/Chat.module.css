@@ -1,3 +1,7 @@
+.user_name {
+  font-weight: bold;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -29,6 +33,20 @@
   text-align: center;
 }
 
+.title_div {
+  margin-top: 10px;
+  border-top: 0.5px solid #ccc;
+  padding-top: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title_div button {
+  margin-top: 5px;
+}
+
 .content input {
   margin-top: 8px;
   padding: 2px 2px 2px 12px;
@@ -47,6 +65,37 @@
   border: none;
   height: 40px;
   margin-top: 16px;
+}
+
+.button_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button_div input {
+  width: 90%;
+  margin-right: 10px;
+}
+
+.button_div button {
+  width: 15%;
+  margin-top: 5px;
+  background-image: url("../../Assets/Icons/paper-plane.png");
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 35px;
+  height: 35px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-image 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button_div button:hover {
+  background-image: url("../../Assets/Icons/message.png");
+  transform: scale(1.1); 
 }
 
 .content ul {
@@ -94,7 +143,7 @@
 
   width: 200px;
 
-  background: #f1f1f1;
+  background: #ccc;
 
   border-radius: 9px;
 }
@@ -110,4 +159,10 @@
   padding: 8px 16px;
   border: none;
   cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.content .disconnectButton:hover {
+  transform: scale(1.05);
 }

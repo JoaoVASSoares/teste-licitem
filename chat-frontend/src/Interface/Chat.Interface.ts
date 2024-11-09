@@ -13,4 +13,5 @@ export interface IPayload {
 export interface IChatProps {
   room: string;
   chatDisconnect: () => void;
+  name: string;
 }

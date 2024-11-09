@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./chat-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - chat-app-network
+
+  backend:
+    build:
+      context: ./chat-backend
+      dockerfile: Dockerfile
+    ports:
+      - "3333:3333"
+    networks:
+      - chat-app-network
+    environment:
+      - NODE_ENV=production
+
+networks:
+  chat-app-network:
+    driver: bridge
