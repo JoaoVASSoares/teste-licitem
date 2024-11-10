@@ -4,9 +4,14 @@ import io, { Socket } from "socket.io-client";
 
 // Styles
 import styles from "./Chat.module.css";
+import { textFieldsStyles } from "./ChatComponetsStyles";
 
 // Intefaces
 import { IChatProps, IMessage, IPayload } from "../../Interface/Chat.Interface";
+
+// Components
+import { Button, colors, TextField } from "@mui/material";
+import { HiOutlinePaperAirplane } from "react-icons/hi2";
 
 const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
   const [title] = useState("Web Chat - 💬");
@@ -79,6 +84,15 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
     }
   };
 
+  const handleEnterDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      const lines = text.split("\n").length;
+      if (lines < 4 || text.trim() === "") {
+        e.preventDefault();
+      }
+    }
+  };
+
   return (
     <div className={styles.container} onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.content}>
@@ -88,17 +102,18 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
             Bem-vindo, <span className={styles.user_name}>{name}</span>!
           </h2>
 
-          <button type="button" onClick={disconnect} className={styles.disconnectButton}>
+          <Button type="button" onClick={disconnect} className={styles.disconnectButton}>
             Desconectar
-          </button>
+          </Button>
         </div>
         <div className={styles.card}>
           <ul>
             {messages.map(message => (
               <li className={message.name === name ? styles.myMessage : styles.otherMessage} key={message.id}>
                 <span>
-                <span className={styles.user_name}>{message.name} </span>diz:</span>
-                <p>{message.text}</p>
+                  <span className={styles.user_name}>{message.name} </span>diz:
+                </span>
+                <p className={styles.messages}>{message.text}</p>
               </li>
             ))}
             <div ref={messagesEndRef} />
@@ -106,8 +121,20 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
         </div>
 
         <div className={styles.button_div}>
-          <input type="text" onChange={e => setText(e.target.value)} value={text} placeholder="Digite uma mensagem" />
-          <button type="button" onClick={() => sendMessage()} title="Enviar mensagem"></button>
+          <TextField
+            sx={textFieldsStyles}
+            key="message-textfield"
+            id="outlined-multiline-flexible"
+            label="Digite uma mensagem"
+            multiline
+            maxRows={4}
+            value={text}
+            onChange={e => setText(e.target.value)}
+            onKeyDown={handleEnterDown}
+          />
+          <Button type="button" onClick={() => sendMessage()}>
+            <HiOutlinePaperAirplane />
+          </Button>
         </div>
       </div>
     </div>

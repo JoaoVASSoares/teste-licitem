@@ -81,10 +81,6 @@
 .button_div button {
   width: 15%;
   margin-top: 5px;
-  background-image: url("../../Assets/Icons/paper-plane.png");
-  background-size: 75%;
-  background-repeat: no-repeat;
-  background-position: center;
   width: 35px;
   height: 35px;
   border: none;
@@ -94,8 +90,17 @@
 }
 
 .button_div button:hover {
-  background-image: url("../../Assets/Icons/message.png");
-  transform: scale(1.1); 
+  transform: scale(1.1);
+}
+
+.button_div button svg {
+  color: black;
+  width: 100%;
+  height: 50px;
+}
+
+.button_div button svg:hover {
+  color: #0088cc;
 }
 
 .content ul {
@@ -165,4 +170,9 @@
 
 .content .disconnectButton:hover {
   transform: scale(1.05);
+}
+
+.messages {
+  overflow-wrap: break-word;
+  width: 100%;
 }
