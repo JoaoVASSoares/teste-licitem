@@ -1,16 +1,8 @@
 FROM node:18
-
 WORKDIR /app
-
-COPY package.json /app/
-COPY package-lock.json /app/
-
+COPY package*.json ./
 RUN npm install
-
-COPY . /app
-
+COPY . .
 RUN npm run build
-
 EXPOSE 3333
-
 CMD ["npm", "run", "start:prod"]
