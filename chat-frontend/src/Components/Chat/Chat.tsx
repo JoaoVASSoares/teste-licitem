@@ -21,7 +21,8 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:3333");
+    // URL do backend
+    const newSocket = io("https://chat-backend-wpzg.onrender.com");
     setSocket(newSocket);
 
     newSocket.emit("joinRoom", room);
