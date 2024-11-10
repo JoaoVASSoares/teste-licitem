@@ -58,13 +58,17 @@ const RoomSelect: React.FC<IRoomSelectProps> = ({ onRoomSelect, onNameSelect }) 
   return (
     <div className={styles.container} onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.content}>
-        <h2>
-          Escolha uma <b>sala</b> e digite seu <b>nome</b> para começar a conversar
-        </h2>
-        <p>Por favor, selecione uma sala e insira seu nome antes de entrar no chat.</p>
+        <div className={styles.text}>
+          <h2>
+            Escolha uma <b>sala</b> e digite seu <b>nome</b> para começar a conversar
+          </h2>
+          <p>Por favor, selecione uma sala e insira seu nome antes de entrar no chat.</p>
+        </div>
 
         <FormControl sx={selectRoomStyles}>
-          <InputLabel id="roomLabel" required>Sala do chat</InputLabel>
+          <InputLabel id="roomLabel" required>
+            Sala do chat
+          </InputLabel>
           <Select labelId="roomLabel" id="roomSelect" label="Sala do chat" value={selectedRoom} onChange={e => setSelectedRoom(e.target.value)} required>
             <MenuItem value="" selected></MenuItem>
             <MenuItem value="roomA">Sala A</MenuItem>

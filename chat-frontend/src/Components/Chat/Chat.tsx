@@ -10,8 +10,9 @@ import { textFieldsStyles } from "./ChatComponetsStyles";
 import { IChatProps, IMessage, IPayload } from "../../Interface/Chat.Interface";
 
 // Components
-import { Button, colors, TextField } from "@mui/material";
-import { HiOutlinePaperAirplane } from "react-icons/hi2";
+import { Button, TextField } from "@mui/material";
+import { IoMdSend } from "react-icons/io";
+
 
 const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
   const [title] = useState("Web Chat - 💬");
@@ -134,7 +135,7 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
             onKeyDown={handleEnterDown}
           />
           <Button type="button" onClick={() => sendMessage()}>
-            <HiOutlinePaperAirplane />
+            <IoMdSend />
           </Button>
         </div>
       </div>
