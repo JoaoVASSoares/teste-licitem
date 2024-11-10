@@ -10,25 +10,26 @@
 .content {
   display: flex;
   flex-direction: column;
-  width: 40%;
-  height: 30%;
+  width: 70%;
+  height: 40%;
   border-radius: 16px;
   align-content: center;
   justify-content: center;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  background-color: #333;
+  background-color: #fff;
 
 }
 
 .container h2 {
   font-weight: bold;
   margin-bottom: 20px;
-  color: white;
+  color: #000;
+  font-size: 1.5em;
 }
 
 .container p {
-  color: #FFF;
+  color: #000;
   margin-bottom: 10px;
 }
 
@@ -38,14 +39,6 @@
   width: 80%;
 }
 
-.container input {
-  margin-top: 8px;
-  padding: 2px 2px 2px 12px;
-  height: 40px;
-  border-radius: 9px;
-  border: 1px solid #333;
-  width: 80%;
-}
 
 .container button {
   display: flex;
