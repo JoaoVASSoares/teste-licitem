@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import logo from "../../Images/logobranca.jpeg";
 
 // Styles
 import styles from "./RoomSelect.module.css";
@@ -12,8 +12,6 @@ import { IRoomSelectProps } from "../../Interface/RoomSelect.Interface";
 // Components
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
-const MySwal = withReactContent(Swal);
-
 const RoomSelect: React.FC<IRoomSelectProps> = ({ onRoomSelect, onNameSelect }) => {
   const [selectedRoom, setSelectedRoom] = useState("");
   const [name, setName] = useState("");
@@ -23,27 +21,27 @@ const RoomSelect: React.FC<IRoomSelectProps> = ({ onRoomSelect, onNameSelect }) 
       onRoomSelect(selectedRoom);
       onNameSelect(name);
     } else if (!selectedRoom && name) {
-      MySwal.fire({
+      Swal.fire({
         icon: "warning",
         title: "Atenção",
         text: "Por favor, selecione uma sala.",
-        confirmButtonText: "Ok",
+        confirmButtonText: "OK",
         confirmButtonColor: "#1976d2",
       });
     } else if (selectedRoom && !name) {
-      MySwal.fire({
+      Swal.fire({
         icon: "warning",
         title: "Atenção",
         text: "Por favor, digite seu nome.",
-        confirmButtonText: "Ok",
+        confirmButtonText: "OK",
         confirmButtonColor: "#1976d2",
       });
     } else {
-      MySwal.fire({
+      Swal.fire({
         icon: "warning",
         title: "Atenção",
         text: "Por favor, selecione uma sala e digite seu nome.",
-        confirmButtonText: "Ok",
+        confirmButtonText: "OK",
         confirmButtonColor: "#1976d2",
       });
     }
@@ -58,18 +56,13 @@ const RoomSelect: React.FC<IRoomSelectProps> = ({ onRoomSelect, onNameSelect }) 
   return (
     <div className={styles.container} onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.content}>
-        <div className={styles.text}>
-          <h2>
-            Escolha uma <b>sala</b> e digite seu <b>nome</b> para começar a conversar
-          </h2>
-          <p>Por favor, selecione uma sala e insira seu nome antes de entrar no chat.</p>
-        </div>
-
+        <img src={logo} alt="logo" width="100" height="100" style={{ marginBottom: "10px" }} />
+        <p className={styles.text}>Bem-vindo ao Chat Licitem!</p>
         <FormControl sx={selectRoomStyles}>
           <InputLabel id="roomLabel" required>
-            Sala do chat
+            Sala
           </InputLabel>
-          <Select labelId="roomLabel" id="roomSelect" label="Sala do chat" value={selectedRoom} onChange={e => setSelectedRoom(e.target.value)} required>
+          <Select labelId="roomLabel" id="roomSelect" label="Sala" value={selectedRoom} onChange={e => setSelectedRoom(e.target.value)} required>
             <MenuItem value="" selected></MenuItem>
             <MenuItem value="roomA">Sala A</MenuItem>
             <MenuItem value="roomB">Sala B</MenuItem>

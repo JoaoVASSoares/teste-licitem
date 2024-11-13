@@ -1,6 +1,8 @@
 export const selectRoomStyles = {
   m: 1,
   width: "80%", // Largura ocupando 80% do contêiner pai
+  background: '#fff',
+  borderRadius: "4px",
   "& .MuiInputLabel-root": {
     color: "gray",
     fontWeight: "bold",
@@ -36,7 +38,14 @@ export const selectRoomStyles = {
 export const inputNameStyles = {
   m: 1,
   width: "80%", 
+  background: '#fff',
+  borderRadius: "4px",
+  "& .MuiInputLabel-root": {
+    color: "gray",
+    fontWeight: "bold",
+  },
   "& .MuiOutlinedInput-root": {
+    backgroundColor: "#fff", //
     "&:hover fieldset": {
       border: "2px solid #1976d2",
       borderColor: "#1976d2", // Cor da borda ao passar o mouse

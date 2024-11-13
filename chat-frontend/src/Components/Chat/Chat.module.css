@@ -9,6 +9,7 @@
 
   height: 100vh;
   width: 100vw;
+  font-family: "Host Grotesk", sans-serif;
 }
 
 .content {
@@ -23,14 +24,19 @@
 
   background: #fff;
 
-  border: 5px solid rgb(37, 37, 37);
   border-radius: 9px;
 }
 
 .content h1 {
   font-weight: bold;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: "Host Grotesk", sans-serif;
   text-align: center;
+}
+
+.chat_icon{
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
 }
 
 .title_div {
@@ -95,14 +101,14 @@
 }
 
 .button_div button svg {
-  color: black;
+  color: #0088cc;
   width: 70%;
   height: 40px;
 
 }
 
 .button_div button svg:hover {
-  color: #0088cc;
+  color: #333;
 }
 
 .content ul {
@@ -116,8 +122,9 @@
   margin-top: 16px;
   height: 100%;
   overflow: auto;
-  border: solid #333 1px;
+  border: solid #ccc 1px;
   border-radius: 9px;
+  margin-bottom: 10px;
 }
 
 .myMessage {
@@ -130,8 +137,8 @@
   align-self: flex-end;
   width: 200px;
 
-  background: #0088cc;
-  color: #fff;
+  background: #1976d2;
+  color: #000;
 
   border-radius: 9px;
 }
@@ -192,7 +199,7 @@
 
 @media (max-width: 480px) {
   .title_div h2 {
-    font-size: 1em;
+    font-size: 1.2em;
   }
 
 
