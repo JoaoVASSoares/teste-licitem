@@ -25,6 +25,7 @@
   background: #fff;
 
   border-radius: 9px;
+  border: 1px solid #ccc;
 }
 
 .content h1 {
@@ -33,7 +34,7 @@
   text-align: center;
 }
 
-.chat_icon{
+.chat_icon {
   width: 40px;
   height: 40px;
   margin-left: 10px;
@@ -137,10 +138,11 @@
   align-self: flex-end;
   width: 200px;
 
-  background: #1976d2;
+  background: #90caf9;
   color: #000;
 
   border-radius: 9px;
+  border: 1px solid #e5e7eb;
 }
 
 .myMessage+li {
@@ -166,20 +168,28 @@
   margin-top: 4px;
 }
 
+.disconnect_icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+
 .content .disconnectButton {
   margin-top: 10px;
-  background-color: red;
-  color: white;
+  background-color: transparent;
   padding: 8px 16px;
   border: none;
   cursor: pointer;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.2s ease;
   font-weight: bold;
+  color: red;
 }
 
 .content .disconnectButton:hover {
   transform: scale(1.05);
+  background-color: red;
+  color: white;
 }
 
 .messages {
@@ -190,6 +200,7 @@
 @media (max-width: 768px) {
   .title_div h2 {
     font-size: 1.5em;
+    margin-top: 10px ;
   }
 
   .content .disconnectButton {

@@ -12,8 +12,9 @@ import { IChatProps, IMessage, IPayload } from "../../Interface/Chat.Interface";
 
 // Components
 import { Button, TextField } from "@mui/material";
-import { IoMdSend } from "react-icons/io";
+import { IoMdSend,IoIosLogOut } from "react-icons/io";
 import { PiChatsDuotone } from "react-icons/pi";
+
 
 
 const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
@@ -118,8 +119,9 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
           <h2>
             Olá, <span className={styles.user_name}>{name}</span>!
           </h2>
-
-       
+          <Button type="button" onClick={disconnect} className={styles.disconnectButton}>
+            Desconectar <IoIosLogOut className={styles.disconnect_icon}/>
+          </Button>
         </div>
         <div className={styles.card}>
           <ul>
@@ -150,11 +152,7 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
           <Button type="button" onClick={() => sendMessage()}>
             <IoMdSend />
           </Button>
-          
         </div>
-        <Button type="button" onClick={disconnect} className={styles.disconnectButton}>
-            Desconectar
-          </Button>
       </div>
     </div>
   );
