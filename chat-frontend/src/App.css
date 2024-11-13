@@ -6,8 +6,8 @@
 }
 
 body {
-  background-color: #0093E9;
-  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(87, 166, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
   color: #333;
 }
 
@@ -31,4 +31,10 @@ strong {
 
 button {
   cursor: pointer;
+}
+
+.swal2-popup,
+.swal2-confirm {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
 }

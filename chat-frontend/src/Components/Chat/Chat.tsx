@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { nanoid } from "nanoid";
 import io, { Socket } from "socket.io-client";
+import Swal from "sweetalert2";
 
 // Styles
 import styles from "./Chat.module.css";
@@ -12,10 +13,11 @@ import { IChatProps, IMessage, IPayload } from "../../Interface/Chat.Interface";
 // Components
 import { Button, TextField } from "@mui/material";
 import { IoMdSend } from "react-icons/io";
+import { PiChatsDuotone } from "react-icons/pi";
 
 
 const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
-  const [title] = useState("Web Chat - 💬");
+  const [title] = useState("Chat");
   const [text, setText] = useState("");
   const [messages, setMessage] = useState<IMessage[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -73,11 +75,24 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
   }
 
   function disconnect() {
-    if (socket) {
-      socket.emit("leaveRoom", room);
-      socket.disconnect();
-    }
-    chatDisconnect();
+    Swal.fire({
+      icon: "warning",
+      title: "Atenção",
+      text: "Deseja sair ?",
+      showCancelButton: true,
+      confirmButtonText: "Sim",
+      confirmButtonColor: "#1976d2",
+      cancelButtonText: "Não",
+      cancelButtonColor: "red",
+    }).then(result => {
+      if (result.isConfirmed) {
+        if (socket) {
+          socket.emit("leaveRoom", room);
+          socket.disconnect();
+        }
+        chatDisconnect();
+      }
+    });
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -98,15 +113,13 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
   return (
     <div className={styles.container} onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.content}>
-        <h1>{title}</h1>
+        <h1>{title}<PiChatsDuotone className={styles.chat_icon}/></h1>
         <div className={styles.title_div}>
           <h2>
-            Bem-vindo, <span className={styles.user_name}>{name}</span>!
+            Olá, <span className={styles.user_name}>{name}</span>!
           </h2>
 
-          <Button type="button" onClick={disconnect} className={styles.disconnectButton}>
-            Desconectar
-          </Button>
+       
         </div>
         <div className={styles.card}>
           <ul>
@@ -137,7 +150,11 @@ const Chat: React.FC<IChatProps> = ({ room, chatDisconnect, name }) => {
           <Button type="button" onClick={() => sendMessage()}>
             <IoMdSend />
           </Button>
+          
         </div>
+        <Button type="button" onClick={disconnect} className={styles.disconnectButton}>
+            Desconectar
+          </Button>
       </div>
     </div>
   );
