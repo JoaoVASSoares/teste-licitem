@@ -6,8 +6,9 @@
 }
 
 body {
-  background: rgb(255, 255, 255);
-  background: linear-gradient(180deg, rgba(87, 166, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  background-color: #e1f5fe;
+  /* background: rgba(87, 166, 255, 1); */
+  /* background: linear-gradient(180deg, rgba(87, 166, 255, 1) 0%, rgba(255, 255, 255, 1) 100%); */
   color: #333;
 }
 
