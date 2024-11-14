@@ -56,7 +56,6 @@ const RoomSelect: React.FC<IRoomSelectProps> = ({ onRoomSelect, onNameSelect }) 
   return (
     <div className={styles.container} onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.content}>
-        {/* <img src={logo} alt="logo" width="200" height="200" style={{ marginBottom: "10px" }} /> */}
         <p className={styles.text}>Bem-vindo ao Chat Licitem!</p>
         <FormControl sx={selectRoomStyles}>
           <InputLabel id="roomLabel" required>
