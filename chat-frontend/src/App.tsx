@@ -6,6 +6,8 @@ import "./App.css";
 // Components
 import Chat from "./Components/Chat/Chat";
 import RoomSelect from "./Components/RoomSelect/RoomSelect";
+import Navbar from "./Components/Navbar/Navbar";
+import Footer from "./Components/Footer/Footer";
 
 function App(): JSX.Element {
   const [room, setRoom] = useState<string | null>(null);
@@ -16,13 +18,17 @@ function App(): JSX.Element {
   }
 
   return (
-    <div>
-      {room && name ?(
-        <Chat room={room} name={name} chatDisconnect={handleDisconnect} />
-      ) : (
-        <RoomSelect onRoomSelect={selectedRoom => setRoom(selectedRoom)} onNameSelect={selectName => setName(selectName)} />
-      )}
-    </div>
+    <>
+      <Navbar />
+      <div>
+        {room && name ? (
+          <Chat room={room} name={name} chatDisconnect={handleDisconnect} />
+        ) : (
+          <RoomSelect onRoomSelect={selectedRoom => setRoom(selectedRoom)} onNameSelect={selectName => setName(selectName)} />
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }
 

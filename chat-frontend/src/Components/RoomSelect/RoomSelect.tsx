@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import logo from "../../Images/logobranca.jpeg";
+import logo from "../../Images/whiteLogo.png";
 
 // Styles
 import styles from "./RoomSelect.module.css";
@@ -56,7 +56,7 @@ const RoomSelect: React.FC<IRoomSelectProps> = ({ onRoomSelect, onNameSelect }) 
   return (
     <div className={styles.container} onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.content}>
-        <img src={logo} alt="logo" width="100" height="100" style={{ marginBottom: "10px" }} />
+        {/* <img src={logo} alt="logo" width="200" height="200" style={{ marginBottom: "10px" }} /> */}
         <p className={styles.text}>Bem-vindo ao Chat Licitem!</p>
         <FormControl sx={selectRoomStyles}>
           <InputLabel id="roomLabel" required>
