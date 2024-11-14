@@ -3,13 +3,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
+  height: 10vh;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .navbar_logo img {
-  height: 70px;
+  height: 10vh;
   width: auto;
   margin-left: 10px;
 }

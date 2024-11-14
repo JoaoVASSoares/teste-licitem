@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import logo from "../../Images/whiteLogo.png";
 
 // Styles
 import styles from "./RoomSelect.module.css";
